@@ -4,9 +4,36 @@
 
 {% block content %}
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center row justify-content-center">
         <h1>Projects</h1>
-       
+            {% if repos %}
+                {% for repo in repos %}
+                    <div class="card justify-content-center border-2" style="width: 17rem;">
+                        <a class="link-underline-opacity-0 link-primary" href="{{ repo.html_url }}" target="_blank">
+                            <h3 class="card-title ">{{ repo.name }}</h3> 
+                            <h4 class="card-subtitle" style="color: {{ get_language_color(repo.language) }}">{{ repo.language }}</h4>
+                            {% if repo.description %}
+                                <p class="card-body">{{ repo.description }}</p>
+                            {% endif %}
+                            <p>Stars: <span style="color: goldenrod;">{{ repo.stargazers_count }} <img src="{{ url_for ('static', filename='images/star.svg')}}"></span></p>
+                            {% if repo.updated_at %}
+                                {% set updated_at_datetime = repo.updated_at | string_to_datetime %}
+                                <p>Last Updated: {{ updated_at_datetime.strftime("%d/%m/%Y") }}</p>
+                            {% endif %}
+
+                            {% if repo.license %}
+                                <p>License: {{ repo.license.name }}</p>
+                            {% endif %}
+
+                        </a>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+                    <p>Oops - failed to load repos...</p>
+
+            {% endif %}
+
     </div>
 
 {% endblock %}

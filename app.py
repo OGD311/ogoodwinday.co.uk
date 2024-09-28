@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, stream_template
+import github as gh
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -8,7 +10,11 @@ def index():
 
 @app.route("/projects")
 def projects():
-    return render_template("projects.html")
+    return stream_template("projects.html", repos=gh.get_user_repositories('OGD311'), get_language_color=gh.get_language_color)
+
+@app.template_filter('string_to_datetime')
+def string_to_datetime(s):
+    return datetime.fromisoformat(s)
 
 @app.route("/socials")
 def socials():
