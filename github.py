@@ -7,6 +7,7 @@ def get_default_repositories():
    filtered_repos = filter_relevant_repositories(repositories)
    sorted_repos = sorted(filtered_repos, key=lambda x: x['pushed_at'], reverse=True)
    
+   print(sorted_repos[0])
    return sorted_repos
 
 def get_user_repositories(username):
@@ -30,8 +31,9 @@ def filter_relevant_repositories(repos):
 
 def get_language_color(language):
     # Load language-color mappings from JSON file
-    with open('static/languages.json') as f:
-        color_map = json.load(f)
+    f =  open('static/languages.json')
+    color_map = json.load(f)
+
     return color_map.get(language, '#333')  # Default to a neutral color if not found
 
 

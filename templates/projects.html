@@ -7,8 +7,12 @@
     <div class="container-fluid text-center row justify-content-center">
         <h1>Projects</h1>
             {% if repos %}
+                {% if repos[-1].error %}
+                <p>Oops - could not connect to the github API. <br> Some of these details may be out of date or inaccurate and some repositories may be missing</p>
+                {% set repos = repos[:-1] %}
+                {% endif %}
                 {% for repo in repos %}
-                    <div class="card justify-content-center border-2" style="width: 17rem;">
+                    <div class="card justify-content-center border-2 m-1" style="width: 17rem;">
                         <a class="link-underline-opacity-0 link-primary" href="{{ repo.html_url }}" target="_blank">
                             <h3 class="card-title ">{{ repo.name }}</h3> 
                             <h4 class="card-subtitle" style="color: {{ get_language_color(repo.language) }}">{{ repo.language }}</h4>
