@@ -31,7 +31,7 @@ def filter_relevant_repositories(repos):
 
 def get_language_color(language):
     # Load language-color mappings from JSON file
-    f =  open('static/languages.json')
+    f =  open('languages.json')
     color_map = json.load(f)
 
     return color_map.get(language, '#333')  # Default to a neutral color if not found

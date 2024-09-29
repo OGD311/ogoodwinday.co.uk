@@ -1,6 +1,6 @@
 from flask import Flask, render_template, stream_template
 import github as gh
-from datetime import datetime
+from dateutil import parser
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def projects():
 
 @app.template_filter('string_to_datetime')
 def string_to_datetime(s):
-    return datetime.fromisoformat(s)
+    return parser.isoparse(s)
 
 @app.route("/socials")
 def socials():
