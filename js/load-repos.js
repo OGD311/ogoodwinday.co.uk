@@ -1,10 +1,20 @@
+function get_github_repositories() {
+    const request = new Request('https://api.github.com/users/OGD311/repos');
+    return fetch(request)
+    .then(response => response.json())
+    .catch(error => {
+        get_default_repositories();
+    });
+}
 function get_default_repositories() {
     return fetch('../default_repos.json')
         .then(response => response.json());
 }
 
 function filter_relevant_repositories(repositories) {
-    return repositories.filter((repo) => repo.name != 'readme' && repo.language);
+    return repositories
+    .filter((repo) => repo.name != 'readme' && repo.language)
+    .sort((a, b) => b.id - a.id);
 }
 
 function formatDate(dateString) {
@@ -106,7 +116,7 @@ function createRepoCard(repos) {
     createFooter(container);
 }
 
-get_default_repositories().then(data => filter_relevant_repositories(data))
+get_github_repositories().then(data => filter_relevant_repositories(data))
     .then(repos =>{
         createRepoCard(repos);
     });
