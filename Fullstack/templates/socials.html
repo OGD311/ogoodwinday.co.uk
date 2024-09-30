@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Socials{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid text-center">
+        <h1>Socials</h1>
+        <ul class="list-group list-group-horizontal justify-content-center" style="list-style: none;">
+            <li><a href="https://uk.linkedin.com/in/oliver-goodwin-day-b841092b0"><img onmouseover="classList.add('active')" onmouseleave="classList.remove('active')"  class="list-group-item" src="{{ url_for ('static', filename='images/IN.svg')}}"></a></li>
+            <li><a href="https://github.com/OGD311"><img onmouseover="classList.add('active')" onmouseleave="classList.remove('active')"  class="list-group-item" src="{{ url_for ('static', filename='images/GITHUB.svg')}}"></a></li>
+            
+                
+            <button class="list-group-item" onmouseover="classList.add('active')" onmouseleave="classList.remove('active')"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="{{ url_for ('static', filename='images/DISCORD.svg')}}">
+            </button>
+            
+           
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Discord</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="document.getElementById('copyUsername').innerHTML = ''; document.getElementById('copyUsername').appendChild(document.createTextNode('Copy username'));"></button>
+                    </div>
+                    <div class="modal-body">
+                        Add me on Discord: @avocati3
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="document.getElementById('copyUsername').innerHTML = ''; document.getElementById('copyUsername').appendChild(document.createTextNode('Copy username'));">Close</button>
+                    <button type="button" id="copyUsername" class="btn btn-primary" onclick="navigator.clipboard.writeText('avocati3'); this.innerHTML = ''; this.appendChild(document.createTextNode('Copied!'));" >Copy username</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </ul>
+    
+    </div>
+
+{% endblock %}
