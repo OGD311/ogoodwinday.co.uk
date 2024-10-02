@@ -1,9 +1,11 @@
 function get_github_repositories() {
     const request = new Request('https://api.github.com/users/OGD311/repos');
     return fetch(request)
-    .then(response => response.json())
-    .catch(error => {
-        get_default_repositories();
+        .then(response => {
+            if (!response.ok) { 
+                return get_default_repositories(); 
+            }
+            return response.json();
     });
 }
 function get_default_repositories() {
